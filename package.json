@@ -1,0 +1,32 @@
+{
+  "name": "vendor-gallery",
+  "version": "1.0.0",
+  "description": "RESTful service to retrieve images and other data concerning vendor offerings from AWS S3, for an antiques mall.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/genma123/vendor-gallery.git"
+  },
+  "keywords": [
+    "Express",
+    "Node",
+    "React",
+    "AWS",
+    "S3"
+  ],
+  "author": "John Emmerling",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/genma123/vendor-gallery/issues"
+  },
+  "homepage": "https://github.com/genma123/vendor-gallery#readme",
+  "dependencies": {
+    "aws-sdk": "^2.20.0",
+    "express": "^4.14.1",
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.4"
+  }
+}

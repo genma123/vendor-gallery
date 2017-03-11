@@ -1,0 +1,8 @@
+.GalleryItem {
+  text-align: center;
+}
+
+.GalleryItem-image {
+	width: 100px;
+	height: 75px;
+}
