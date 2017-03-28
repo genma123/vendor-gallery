@@ -1,9 +1,14 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const aws = require('aws-sdk');
 const fs = require('fs');
 const _ = require('lodash');
 
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.static('./public'));
 app.listen(process.env.PORT || 3001);
 
@@ -51,7 +56,7 @@ function postProcess(fileNames) {
 		});
 }
 
-function listFiles(req, res, prefix) {
+function listFiles(req, res, booth) {
 	console.log("in listFiles");
 	
 	var params = {
@@ -59,21 +64,13 @@ function listFiles(req, res, prefix) {
 	  EncodingType: 'url',
 	  FetchOwner: true || false,
 	  MaxKeys: 1000,
-	  Prefix: prefix
+	  Prefix: booth
 	};
 	
 	s3.listObjectsV2(params, function(err, data) {
 	  if (err) console.log(err, err.stack); // an error occurred
-	  else  {   /* console.log(data); */          // successful response
-		// console.log(_.map(data.Contents, "Key"));
-		/* _.map(data.Contents, "Key").map( / * x => copyFile(req, res, x) * /
-			function(file) {
-				copyFile(req, res, file).then(function(x) {
-					console.log("Done copying: " + x);
-				});
-			}
-		); */
-		
+	  else  {
+		  
 		Promise.all(_.map(data.Contents, "Key").map(
 			function(file) {
 				return copyFile(req, res, file);
@@ -90,11 +87,11 @@ function listFiles(req, res, prefix) {
 }
 
 app.get('/api/images', (req, res) => {
-	console.log("got request");
+	console.log("got request,  booth: " + req.query.booth);
 
-	const prefix = 'mantiques';
+	const booth = req.query.booth ? req.query.booth : 'mantiques';
 	
-	listFiles(req, res, prefix);
+	listFiles(req, res, booth);
 
   /* var out = fs.createWriteStream("/tmp/test.jpg",
 	{ flags: 'w',
