@@ -10,7 +10,7 @@ class GalleryItem extends Component {
   
 	render() {
 		console.log("rendering " + process.env.PUBLIC_URL + this.props.imageName);
-		return <img src={process.env.PUBLIC_URL +this.props.imageName} className="GalleryItem-image" />;
+		return <p><img src={process.env.PUBLIC_URL +this.props.imageName} className="GalleryItem-image" /></p>;
 	}
 }
 

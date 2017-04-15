@@ -12,9 +12,10 @@ class Gallery extends Component {
 	}
   
 	render() {
+		const galleryItems = this.props.imageNames.map((imageName, k) => <GalleryItem key={k} imageName={imageName}/>);
 		return (
 			<div className="Gallery">
-			{this.props.imageNames.map((imageName, k) => { return <p><GalleryItem key={k} imageName={imageName}/></p>; } )}
+			{galleryItems}
 			</div>
 		);
 	}
